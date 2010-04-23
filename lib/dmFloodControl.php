@@ -37,9 +37,9 @@ class dmFloodControl extends dmConfigurable
    */
   public function consume($actionCode, $creditsLimit, $creditsUsed = 1)
   {
-    $ip = $this->getCurrentClientIp();
+    $ip = $this->getCurrentIp();
     
-    $entity = $this->getEntityTable()->findOneByIpAndActionCodeOrCreate($ip, $actionCode);
+    $entity = $this->getEntityTable()->findOneByActionCodeAndIpOrCreate($actionCode, $ip);
 
     $totalCreditsUsed = $entity->consume($creditsUsed);
 
@@ -52,9 +52,36 @@ class dmFloodControl extends dmConfigurable
   }
 
   /**
+   * Set current client used credits to 0 for this action,
+   * by clearing all entities related to an action code and the current client IP.
+   */
+  public function resetActionForCurrentIp($actionCode)
+  {
+    return $this->resetActionForIp($actionCode, $this->getCurrentIp());
+  }
+
+  /**
+   * Set current client used credits to 0 for this action,
+   * by clearing all entities related to an action code and a client IP.
+   */
+  public function resetActionForIp($actionCode, $ip)
+  {
+    $this->getEntityTable()->clearByActionCodeAndIp($actionCode, $ip);
+  }
+
+  /**
+   * Set all client used credits to 0 for this action,
+   * by clearing all entities related to an action code.
+   */
+  public function resetAction($actionCode)
+  {
+    $this->getEntityTable()->clearByActionCode($actionCode);
+  }
+
+  /**
    * @return string the client IP
    */
-  public function getCurrentClientIp()
+  public function getCurrentIp()
   {
     // localhost
     if(!$ip = $this->request->getForwardedFor())
