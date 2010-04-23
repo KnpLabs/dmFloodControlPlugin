@@ -1,0 +1,9 @@
+DmFloodControlEntity:
+  columns:
+    ip:           { type: string(31), notnull: true }
+    action_code:  { type: integer(2), notnull: true }
+    credits_used: { type: integer, notnull: true, default: 0 }
+  indexes:
+    ip_action:
+      fields:     [ ip, action_code ]
+      type:       unique
