@@ -12,7 +12,7 @@ class PluginDmFloodControlEntityTable extends myDoctrineTable
     $record = $this->createQuery('r')
     ->where('r.ip = ?', $ip)
     ->andWhere('r.action_code = ?', $actionCode)
-    ->findOne();
+    ->fetchRecord();
 
     if(!$record)
     {
