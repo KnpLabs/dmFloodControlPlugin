@@ -1,11 +1,11 @@
 parameters:
 
-  dm_flood_control.class:         dmFloodControl
-  dm_flood_control.options:
+  flood_control.class:            dmFloodControl
+  flood_control.options:
     entity_model:                 DmFloodControlEntity
 
 services:
 
-  dm_flood_control:
+  flood_control:
     class:                        %dm_flood_control.class%
     arguments:                    [ @request, %dm_flood_control.options% ]
