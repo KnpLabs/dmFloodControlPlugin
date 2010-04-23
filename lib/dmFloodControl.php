@@ -78,3 +78,8 @@ class dmFloodControl extends dmConfigurable
     return dmDb::table($this->getOption('entity_model'));
   }
 }
+
+class dmFloodControlOutOfCreditException extends dmException
+{
+  
+}
