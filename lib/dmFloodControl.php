@@ -8,7 +8,7 @@ class dmFloodControl extends dmConfigurable
   {
     $this->request = $request;
 
-    $this->initialize($options);
+    $this->configure($options);
   }
 
   public function getDefaultOptions()
@@ -16,11 +16,6 @@ class dmFloodControl extends dmConfigurable
     return array(
       'entity_model' => 'DmFloodControlEntity'
     );
-  }
-
-  public function initialize(array $options)
-  {
-    $this->configure($options);
   }
 
   /**
