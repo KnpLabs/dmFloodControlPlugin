@@ -7,5 +7,5 @@ parameters:
 services:
 
   flood_control:
-    class:                        %dm_flood_control.class%
-    arguments:                    [ @request, %dm_flood_control.options% ]
+    class:                        %flood_control.class%
+    arguments:                    [ @request, %flood_control.options% ]
