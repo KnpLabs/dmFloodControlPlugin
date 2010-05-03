@@ -3,6 +3,8 @@ parameters:
   flood_control.class:            dmFloodControl
   flood_control.options:
     entity_model:                 DmFloodControlEntity
+    ip_white_list:
+      - xxx.xxx.xxx.xxx           # Add here the IPs which can bypass the flood control
 
 services:
 

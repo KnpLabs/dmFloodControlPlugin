@@ -38,6 +38,11 @@ class dmFloodControl extends dmConfigurable
   public function consume($actionCode, $creditsLimit, $creditsUsed = 1)
   {
     $ip = $this->getCurrentIp();
+
+    if($this->isInWhiteList($ip))
+    {
+      return;
+    }
     
     $entity = $this->getEntityTable()->findOneByActionCodeAndIpOrCreate($actionCode, $ip);
 
@@ -103,6 +108,11 @@ class dmFloodControl extends dmConfigurable
   public function getEntityTable()
   {
     return dmDb::table($this->getOption('entity_model'));
+  }
+
+  public function isInWhiteList($ip)
+  {
+    return in_array($ip, (array) $this->getOption('ip_white_list'));
   }
 }
 
